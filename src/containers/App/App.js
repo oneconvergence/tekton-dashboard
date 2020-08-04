@@ -202,10 +202,6 @@ export /* istanbul ignore next */ class App extends Component {
         {!showLoadingState && (
           <Router>
             <>
-              <Header logoutButton={logoutButton} />
-              <Route path={paths.byNamespace({ path: '/*' })}>
-                {props => <SideNav {...props} />}
-              </Route>
 
               <Content>
                 <PageErrorBoundary>

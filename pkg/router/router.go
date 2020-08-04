@@ -55,7 +55,7 @@ const ExtensionDisplayNameKey = "tekton-dashboard-display-name"
 // ExtensionRoot is the URL root when accessing extensions
 const ExtensionRoot = "/v1/extensions"
 
-const webResourcesDir = "/var/run/ko"
+const webResourcesDir = "/go/src/github.com/tektoncd/dashboard/web"
 
 var webResourcesStaticPattern = regexp.MustCompile("^/([[:alnum:]]+\\.)?[[:alnum:]]+\\.(js)|(css)|(png)$")
 var webResourcesStaticExcludePattern = regexp.MustCompile("^/favicon.png$")
@@ -223,7 +223,7 @@ func registerWeb(container *restful.Container) {
 			// Static resources are immutable and have a content hash in their URL
 			w.Header().Set("Cache-Control", "public, max-age=31536000, immutable")
 		}
-		w.Header().Set("X-Frame-Options", "deny")
+		//w.Header().Set("X-Frame-Options", "deny")
 		fs.ServeHTTP(w, r)
 	}))
 }

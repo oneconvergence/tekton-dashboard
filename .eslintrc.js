@@ -33,6 +33,8 @@ module.exports = {
   plugins: ['notice', 'react'],
   rules: {
     curly: ['error', 'all'],
+    'no-unused-vars': 'off',
+    'prettier/prettier': 'warn',
     'import/prefer-default-export': 'off',
     'import/no-extraneous-dependencies': 'off',
     'jsx-a11y/anchor-is-valid': 'off',
