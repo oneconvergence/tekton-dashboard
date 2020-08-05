@@ -148,8 +148,39 @@ class SideNav extends Component {
 
     history.push('/');
   };
-
   render() {
+    return (
+      <CarbonSideNav
+        isFixedNav
+        expanded
+        isChildOfHeader={false}
+        aria-label="Main navigation"
+      >
+        <SideNavItems>
+          <SideNavMenu
+            defaultExpanded
+            title={"DKube-CICD"}
+          >
+            <SideNavMenuItem
+              element={NavLink}
+              icon={<span />}
+              to={"/namespaces/dkube-cicd/pipelineruns"}
+            >
+              PipelineRuns
+            </SideNavMenuItem>
+            <SideNavMenuItem
+              element={NavLink}
+              icon={<span />}
+              to={"/namespaces/dkube-cicd/taskruns"}
+            >
+              TaskRuns
+            </SideNavMenuItem>
+          </SideNavMenu>
+        </SideNavItems>
+      </CarbonSideNav>
+    )
+  }
+  render1() {
     const { extensions, intl, namespace } = this.props;
 
     return (
