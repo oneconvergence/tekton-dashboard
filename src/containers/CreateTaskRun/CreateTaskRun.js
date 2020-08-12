@@ -64,7 +64,7 @@ const initialState = {
   nodeSelector: [],
   paramSpecs: [],
   resourceSpecs: [],
-  serviceAccount: '',
+  serviceAccount: 'tekton-triggers-sa',
   submitError: '',
   taskError: false,
   taskRef: '',

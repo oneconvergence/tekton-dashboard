@@ -171,6 +171,13 @@ class SideNav extends Component {
             <SideNavMenuItem
               element={NavLink}
               icon={<span />}
+              to={"/namespaces/dkube-cicd/pipelineresources"}
+            >
+              PipelineResources
+            </SideNavMenuItem>
+            <SideNavMenuItem
+              element={NavLink}
+              icon={<span />}
               to={"/namespaces/dkube-cicd/taskruns"}
             >
               TaskRuns
