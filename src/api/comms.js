@@ -29,11 +29,12 @@ export function getAPIRoot() {
 }
 
 const apiRoot = getAPIRoot();
-
+const token = localStorage.getItem("token")
 export function getHeaders(headers = {}) {
   return {
     Accept: 'application/json',
     'Content-Type': 'application/json',
+    'Authorization': 'bearer ' + token,
     ...headers
   };
 }
