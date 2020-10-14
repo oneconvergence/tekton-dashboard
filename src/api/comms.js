@@ -34,7 +34,7 @@ export function getHeaders(headers = {}) {
   return {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    'Authorization': 'bearer ' + token,
+    'Authorization': 'Bearer ' + token,
     ...headers
   };
 }
