@@ -29,12 +29,21 @@ export function getAPIRoot() {
 }
 
 const apiRoot = getAPIRoot();
-const token = localStorage.getItem("token")
+
+let dkubeToken = '';
+if (window.location.href.includes('?token=')) {
+  const query = window.location.href.split('?')[1];
+  [, dkubeToken] = query.split('=');
+  localStorage.setItem('token', dkubeToken);
+} else {
+  dkubeToken = localStorage.getItem('token');
+}
+
 export function getHeaders(headers = {}) {
   return {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer ' + token,
+    Authorization: `Bearer ${dkubeToken}`,
     ...headers
   };
 }
@@ -43,6 +52,7 @@ export function getPatchHeaders(headers = {}) {
   return {
     Accept: 'application/json-patch+json',
     'Content-Type': 'application/json-patch+json',
+    Authorization: `Bearer ${dkubeToken}`,
     ...headers
   };
 }
@@ -87,6 +97,7 @@ function getToken() {
   return fetch(`${apiRoot}/v1/token`, {
     ...defaultOptions,
     headers: {
+      Authorization: `Bearer ${dkubeToken}`,
       Accept: 'text/plain'
     }
   }).then(response => response.headers.get(CSRF_HEADER));
