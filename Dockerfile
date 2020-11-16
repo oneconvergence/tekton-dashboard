@@ -27,14 +27,18 @@ WORKDIR /work
 COPY . .
 RUN GO111MODULE=on CGO_ENABLED=0 GOOS=linux GOARCH=$GOARCH go build -a -installsuffix cgo -o tekton_dashboard_backend ./cmd/dashboard
 
-FROM alpine@sha256:7df6db5aa61ae9480f52f0b3a06a140ab98d427f86d8d5de0bedab9b8df6b1c0
-RUN addgroup -g 1000 kgroup && \
-  adduser -G kgroup -u 1000 -D -S kuser
-USER 1000
+FROM nginx:1.19.4-alpine as main
+
+RUN apk add sudo
+RUN chown -R nginx:nginx /var/ /run
+RUN echo "nginx ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+USER 101
 
 WORKDIR /go/src/github.com/tektoncd/dashboard
 
 COPY --from=nodeBuilder /go/src/github.com/tektoncd/dashboard/dist ./web
 COPY --from=goBuilder /work/tekton_dashboard_backend .
 
-ENTRYPOINT ["./tekton_dashboard_backend"]
+COPY /etc /etc
+COPY start-dashboard.sh .
+ENTRYPOINT ["./start-dashboard.sh"]
