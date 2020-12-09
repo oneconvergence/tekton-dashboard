@@ -202,9 +202,6 @@ export /* istanbul ignore next */ class App extends Component {
         {!showLoadingState && (
           <Router>
             <>
-              <Route path={paths.byNamespace({ path: '/*' })}>
-                {props => <SideNav {...props} />}
-              </Route>
               <Content>
                 <PageErrorBoundary>
                   <Switch>
@@ -472,7 +469,7 @@ export /* istanbul ignore next */ class App extends Component {
 
 App.defaultProps = {
   extensions: [],
-  onUnload: () => {}
+  onUnload: () => { }
 };
 
 /* istanbul ignore next */
