@@ -28,12 +28,30 @@ export function getAPIRoot() {
   return baseURL;
 }
 
+function getQueryParams(qs) {
+  const qs1 = qs.split('+').join(' ');
+
+  const params = {};
+  let tokens;
+  const re = /[?&]?([^=]+)=([^&]*)/g;
+
+  do {
+    tokens = re.exec(qs1);
+    if (tokens) {
+      params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+    }
+  } while (tokens);
+
+  return params;
+}
+
 const apiRoot = getAPIRoot();
 
 let dkubeToken = '';
 if (window.location.href.includes('?token=')) {
   const query = window.location.href.split('?')[1];
-  [, dkubeToken] = query.split('=');
+  const params = getQueryParams(query)
+  dkubeToken = params.token
   localStorage.setItem('token', dkubeToken);
 } else {
   dkubeToken = localStorage.getItem('token');
