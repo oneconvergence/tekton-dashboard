@@ -29,37 +29,6 @@ const LogDownloadButton = ({ intl, stepStatus, taskRun }) => {
 
   return (
     <>
-      <div className="bx--btn-set">
-        <a
-          className="bx--copy-btn"
-          href={logURL}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Launch16>
-            <title>
-              {intl.formatMessage({
-                id: 'dashboard.logs.launchButtonTooltip',
-                defaultMessage: 'Open logs in a new window'
-              })}
-            </title>
-          </Launch16>
-        </a>
-        <a
-          className="bx--copy-btn"
-          download={`${pod}__${container}__log.txt`}
-          href={logURL}
-        >
-          <Download16>
-            <title>
-              {intl.formatMessage({
-                id: 'dashboard.logs.downloadButtonTooltip',
-                defaultMessage: 'Download logs'
-              })}
-            </title>
-          </Download16>
-        </a>
-      </div>
     </>
   );
 };
